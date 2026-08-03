@@ -50,3 +50,5 @@ if __name__ == "__main__":
     print(orchestrator("I have severe chest pain and sweating."))
 
 # Enhanced intent recognition coming soon
+
+# Integrate with OpenRouter LLM
