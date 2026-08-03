@@ -39,3 +39,5 @@ if __name__ == "__main__":
     get_vector_store()
     print("\n--- Test Retrieval ---")
     print(retrieve_context("What are the symptoms of a heart attack?"))
+
+# Ensure DB is persistent
