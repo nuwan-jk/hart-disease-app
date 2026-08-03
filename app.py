@@ -8,10 +8,12 @@ load_dotenv()
 # We import the orchestrator from agents.py
 try:
     from agents import orchestrator
-except ImportError:
-    # Fallback if agents.py is not in the same directory or has issues
+except Exception as e:
+    import traceback
+    err_msg = traceback.format_exc()
+    # Fallback if agents.py has missing dependencies on Streamlit Cloud
     def orchestrator(user_input):
-        return "Agents module not found."
+        return f"**System Error**: Agents module failed to load. Please check `requirements.txt`.\n\nDetails:\n```text\n{err_msg}\n```"
 
 st.set_page_config(page_title="Heart Disease AI Predictor", page_icon="🫀", layout="centered")
 

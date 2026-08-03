@@ -4,3 +4,8 @@ langchain
 chromadb
 python-dotenv
 openai
+sentence-transformers
+langchain-huggingface
+langchain-community
+langchain-chroma
+pysqlite3-binary
