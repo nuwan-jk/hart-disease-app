@@ -60,7 +60,13 @@ Response:"""
             ],
             temperature=0.3
         )
-        return response.choices[0].message.content.strip()
+        
+        ai_response = response.choices[0].message.content.strip()
+        
+        # Append the retrieved context to the response to prove it's using the dataset
+        proof = f"\n\n---\n**📚 Proof of RAG (Context Retrieved from Database):**\n```text\n{context}\n```"
+        
+        return ai_response + proof
     except Exception as e:
         return f"Error communicating with AI Synthesizer: {e}"
 
