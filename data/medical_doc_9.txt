@@ -1,0 +1,7 @@
+Medical Document 9
+Topic: Aortic Aneurysm
+
+Symptoms and Presentation:
+Patients with Aortic Aneurysm typically present with the following symptoms: Deep, constant pain in the belly or side, back pain, pulse feeling near the bellybutton.
+Diagnosis often involves ECG, echocardiogram, and blood tests. Early detection is critical for improving patient outcomes.
+Treatment options may include lifestyle changes, medications (such as beta-blockers or ACE inhibitors), and in severe cases, surgical interventions.

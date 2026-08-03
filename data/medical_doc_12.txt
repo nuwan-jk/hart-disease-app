@@ -1,0 +1,7 @@
+Medical Document 12
+Topic: Myocardial Infarction (Heart Attack)
+
+Symptoms and Presentation:
+Patients with Myocardial Infarction (Heart Attack) typically present with the following symptoms: Severe chest pressure, pain radiating to jaw or left arm, cold sweat, nausea, lightheadedness.
+Diagnosis often involves ECG, echocardiogram, and blood tests. Early detection is critical for improving patient outcomes.
+Treatment options may include lifestyle changes, medications (such as beta-blockers or ACE inhibitors), and in severe cases, surgical interventions.

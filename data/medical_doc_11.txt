@@ -1,0 +1,7 @@
+Medical Document 11
+Topic: Coronary Artery Disease (CAD)
+
+Symptoms and Presentation:
+Patients with Coronary Artery Disease (CAD) typically present with the following symptoms: Chest pain (angina), shortness of breath, pain in arms or shoulders, fatigue, sweating.
+Diagnosis often involves ECG, echocardiogram, and blood tests. Early detection is critical for improving patient outcomes.
+Treatment options may include lifestyle changes, medications (such as beta-blockers or ACE inhibitors), and in severe cases, surgical interventions.

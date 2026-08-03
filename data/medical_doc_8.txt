@@ -1,0 +1,7 @@
+Medical Document 8
+Topic: Endocarditis
+
+Symptoms and Presentation:
+Patients with Endocarditis typically present with the following symptoms: Aching joints and muscles, chest pain when breathing, fatigue, flu-like symptoms, night sweats.
+Diagnosis often involves ECG, echocardiogram, and blood tests. Early detection is critical for improving patient outcomes.
+Treatment options may include lifestyle changes, medications (such as beta-blockers or ACE inhibitors), and in severe cases, surgical interventions.
