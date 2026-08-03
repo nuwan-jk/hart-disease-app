@@ -11,20 +11,16 @@ try:
         base_url="https://api.groq.com/openai/v1",
         api_key=os.environ.get("GROQ_API_KEY")
     )
-    openrouter_client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=os.environ.get("OPENROUTER_API_KEY")
-    )
 except Exception as e:
     print(f"Error initializing API clients: {e}")
 
 def router_agent(user_input: str) -> str:
     """
-    Router Agent: Uses Llama 3 8B on Groq to classify intent.
+    Router Agent: Uses Llama 3.1 8B on Groq to classify intent.
     """
     try:
         response = groq_client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.1-8b-instant",
             messages=[
                 {"role": "system", "content": "You are an intent router. Classify the user input into exactly one of these three categories: 'greeting', 'medical_symptom', 'other'. Respond with ONLY the category name and nothing else."},
                 {"role": "user", "content": user_input}
@@ -42,7 +38,7 @@ def router_agent(user_input: str) -> str:
 
 def medical_synthesizer_agent(user_input: str) -> str:
     """
-    Synthesizer Agent: Retrieves context and generates a diagnosis prediction using OpenRouter.
+    Synthesizer Agent: Retrieves context and generates a diagnosis prediction using Groq.
     """
     context = retrieve_context(user_input, k=3)
     
@@ -58,7 +54,7 @@ Response:"""
     
     try:
         response = groq_client.chat.completions.create(
-            model="llama3-70b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "user", "content": prompt}
             ],
