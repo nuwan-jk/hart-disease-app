@@ -69,3 +69,5 @@ sequenceDiagram
 - The medical data is synthetic and limited to 20 documents.
 - Not a replacement for professional medical advice.
 - Streamlit Community Cloud deployment requires setting secrets manually via the web interface.
+
+<!-- End of README -->
