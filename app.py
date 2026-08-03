@@ -53,3 +53,5 @@ if prompt := st.chat_input("Describe your symptoms here... (e.g., 'I have chest 
         st.markdown(response)
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
+
+# Session state persistence
