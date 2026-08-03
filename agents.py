@@ -79,7 +79,7 @@ Medical Context:
     
     try:
         response = groq_client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-70b-versatile",
             messages=llm_messages,
             temperature=0.3
         )
