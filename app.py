@@ -48,7 +48,7 @@ if prompt := st.chat_input("Describe your symptoms here... (e.g., 'I have chest 
 
     # Call our agent orchestrator
     with st.spinner("Analyzing symptoms and retrieving medical context..."):
-        response = orchestrator(prompt)
+        response = orchestrator(st.session_state.messages)
     
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
