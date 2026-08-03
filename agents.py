@@ -20,7 +20,7 @@ def router_agent(user_input: str) -> str:
     """
     try:
         response = groq_client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="llama3-8b-8192",
             messages=[
                 {"role": "system", "content": "You are an intent router. Classify the user input into exactly one of these three categories: 'greeting', 'medical_symptom', 'other'. Respond with ONLY the category name and nothing else."},
                 {"role": "user", "content": user_input}
@@ -79,7 +79,7 @@ Medical Context:
     
     try:
         response = groq_client.chat.completions.create(
-            model="llama-3.1-70b-versatile",
+            model="llama3-70b-8192",
             messages=llm_messages,
             temperature=0.3
         )
