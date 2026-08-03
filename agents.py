@@ -44,14 +44,28 @@ def medical_synthesizer_agent(messages: list) -> str:
     
     # Create a string representation of the conversation for context retrieval
     conversation_str = "\n".join([f"{m['role']}: {m['content']}" for m in messages])
-    context = retrieve_context(conversation_str, k=3)
+    raw_context = retrieve_context(conversation_str, k=3)
+    
+    # Deduplicate the context chunks to prevent ugly repetitive text
+    unique_chunks = []
+    for chunk in raw_context.split('\n\n'):
+        if chunk.strip() and chunk.strip() not in unique_chunks:
+            unique_chunks.append(chunk.strip())
+    context = "\n\n".join(unique_chunks)
     
     system_prompt = f"""You are an expert AI cardiologist conducting an interactive assessment. 
-Instead of writing a long essay immediately, act as a conversational doctor. 
-If you need more information to make an accurate prediction, ask 1 or 2 short, direct follow-up questions (e.g., 'Do you have high blood pressure?', 'How long does the pain last?'). 
-Once you have enough information, provide a SHORT, precise diagnostic note. 
-When giving a diagnosis, you MUST include clear percentage probabilities for your top predictions (e.g., Coronary Artery Disease: 85%, Panic Attack: 15%).
-Based ONLY on the following clinical medical context from our database, do not hallucinate outside facts. Keep your answers brief and conversational.
+Follow this STRICT workflow:
+
+PHASE 1: GATHER INFORMATION
+- You MUST ask the user relevant follow-up questions ONE AT A TIME based on their symptoms.
+- Continue asking questions (one per response) until you have collected at least 3 distinct pieces of medical information from the user's answers. 
+- DO NOT provide any diagnosis, summary, or percentages during Phase 1. Just ask the next question and wait for the user to answer.
+
+PHASE 2: DIAGNOSIS
+- ONLY when you have gathered enough information (at least 3 responses), stop asking questions.
+- Provide a SHORT, precise diagnostic note. 
+- You MUST include clear percentage probabilities for your top predictions (e.g., Coronary Artery Disease: 85%, Normal: 15%).
+- Based ONLY on the following clinical medical context from our database, do not hallucinate outside facts.
 
 Medical Context:
 {context}"""
@@ -59,8 +73,8 @@ Medical Context:
     # Build the LLM messages payload
     llm_messages = [{"role": "system", "content": system_prompt}]
     for msg in messages:
-        # Strip the RAG proof from previous assistant messages to save context window
-        content = msg["content"].split("\n\n---\n**📚 Proof of RAG")[0]
+        # Strip the RAG context from previous assistant messages to save context window
+        content = msg["content"].split("|||CONTEXT|||")[0].strip()
         llm_messages.append({"role": msg["role"], "content": content})
     
     try:
@@ -72,10 +86,8 @@ Medical Context:
         
         ai_response = response.choices[0].message.content.strip()
         
-        # Append the retrieved context to the response to prove it's using the dataset
-        proof = f"\n\n---\n**📚 Proof of RAG (Context Retrieved from Database):**\n```text\n{context}\n```"
-        
-        return ai_response + proof
+        # Append the retrieved context using a hidden delimiter so UI can parse it
+        return f"{ai_response}|||CONTEXT|||{context}"
     except Exception as e:
         return f"Error communicating with AI Synthesizer: {e}"
 

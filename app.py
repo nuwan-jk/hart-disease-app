@@ -37,7 +37,14 @@ if "messages" not in st.session_state:
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+        if "|||CONTEXT|||" in message["content"]:
+            resp, ctx = message["content"].split("|||CONTEXT|||")
+            st.markdown(resp)
+            if ctx.strip():
+                with st.expander("📚 View RAG Context"):
+                    st.markdown(f"```text\n{ctx.strip()}\n```")
+        else:
+            st.markdown(message["content"])
 
 # React to user input
 if prompt := st.chat_input("Describe your symptoms here... (e.g., 'I have chest pain and shortness of breath')"):
@@ -48,13 +55,23 @@ if prompt := st.chat_input("Describe your symptoms here... (e.g., 'I have chest 
 
     # Call our agent orchestrator
     with st.spinner("Analyzing symptoms and retrieving medical context..."):
-        response = orchestrator(st.session_state.messages)
+        full_response = orchestrator(st.session_state.messages)
     
+    if "|||CONTEXT|||" in full_response:
+        response_text, context_text = full_response.split("|||CONTEXT|||")
+    else:
+        response_text = full_response
+        context_text = ""
+        
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        st.markdown(response)
+        st.markdown(response_text)
+        if context_text.strip():
+            with st.expander("📚 View RAG Context"):
+                st.markdown(f"```text\n{context_text.strip()}\n```")
+                
     # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 # Session state persistence
 
