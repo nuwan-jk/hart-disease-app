@@ -94,10 +94,23 @@ Medical Context:
 def orchestrator(messages: list) -> str:
     """
     Orchestrator: Routes the user input to the correct agent.
+    Only the FIRST user message is classified by the router agent.
+    All subsequent messages (follow-up answers) are sent directly to the
+    medical synthesizer so short answers like 'arm', 'no', 'yes' are not
+    mis-classified as 'other'.
     """
     latest_user_input = messages[-1]["content"]
+
+    # Count how many user messages have been exchanged so far
+    user_message_count = sum(1 for m in messages if m["role"] == "user")
+
+    # If this is a follow-up in an ongoing conversation, skip routing
+    if user_message_count > 1:
+        return medical_synthesizer_agent(messages)
+
+    # First message only: classify intent
     intent = router_agent(latest_user_input)
-    
+
     if intent == "greeting":
         return "Hello! I am a Heart Disease Prediction AI. Please describe your symptoms (e.g., chest pain, shortness of breath) and I will assess your condition based on our clinical guidelines."
     elif intent == "medical_symptom":
