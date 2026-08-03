@@ -1,35 +1,72 @@
 import os
+from openai import OpenAI
 from rag import retrieve_context
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Initialize clients using OpenAI compatible endpoints
+try:
+    groq_client = OpenAI(
+        base_url="https://api.groq.com/openai/v1",
+        api_key=os.environ.get("GROQ_API_KEY")
+    )
+    openrouter_client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=os.environ.get("OPENROUTER_API_KEY")
+    )
+except Exception as e:
+    print(f"Error initializing API clients: {e}")
 
 def router_agent(user_input: str) -> str:
     """
-    Router Agent: Uses simple heuristics (or a fast LLM) to classify intent.
-    Intent categories: 'greeting', 'medical_symptom', 'other'
+    Router Agent: Uses Llama 3 8B on Groq to classify intent.
     """
-    input_lower = user_input.lower()
-    greetings = ['hi', 'hello', 'hey', 'good morning', 'good evening', 'test']
-    
-    if any(greet in input_lower for greet in greetings):
-        return "greeting"
-    elif any(word in input_lower for word in ['pain', 'chest', 'breath', 'sweat', 'fatigue', 'heart', 'dizzy', 'numb']):
-        return "medical_symptom"
-    else:
+    try:
+        response = groq_client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[
+                {"role": "system", "content": "You are an intent router. Classify the user input into exactly one of these three categories: 'greeting', 'medical_symptom', 'other'. Respond with ONLY the category name and nothing else."},
+                {"role": "user", "content": user_input}
+            ],
+            temperature=0.0
+        )
+        intent = response.choices[0].message.content.strip().lower()
+        if 'greeting' in intent: return 'greeting'
+        if 'medical' in intent: return 'medical_symptom'
+        if 'other' in intent: return 'other'
         return "other"
+    except Exception as e:
+        print(f"Router error: {e}")
+        return "medical_symptom" # fallback
 
 def medical_synthesizer_agent(user_input: str) -> str:
     """
-    Synthesizer Agent: Retrieves context and generates a diagnosis prediction.
+    Synthesizer Agent: Retrieves context and generates a diagnosis prediction using OpenRouter.
     """
-    print("[Agent] Retrieving medical context from vector DB...")
-    context = retrieve_context(user_input)
+    context = retrieve_context(user_input, k=3)
     
-    print("[Agent] Synthesizing response using High Reasoning Model...")
-    api_key = os.getenv("OPENROUTER_API_KEY")
-    if not api_key:
-        return f"**(Mock Response - OpenRouter API Key missing)**\n\nBased on your symptoms and our medical database, here is a prediction.\n\n**Retrieved Context:**\n{context}\n\n*Please provide OpenRouter API key in .env for real AI inference.*"
+    prompt = f"""You are an expert AI cardiologist. Based ONLY on the following clinical medical context from our database and the user's symptoms, provide a potential assessment. Include a percentage likelihood if possible, and clearly state that this is an AI prediction, not a replacement for a real doctor. Do not make up facts outside the context.
+
+User Symptoms:
+{user_input}
+
+Medical Context:
+{context}
+
+Response:"""
     
-    # In a fully connected version, this would call OpenRouter API using LangChain/OpenAI client
-    return f"**(Real Inference Mode)**\nRetrieved Context:\n{context}\n\nPrediction: (API connection code would run here)"
+    try:
+        response = openrouter_client.chat.completions.create(
+            model="meta-llama/llama-3.1-8b-instruct:free",
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        return f"Error communicating with AI Synthesizer: {e}"
 
 def orchestrator(user_input: str) -> str:
     """
@@ -37,18 +74,11 @@ def orchestrator(user_input: str) -> str:
     """
     intent = router_agent(user_input)
     if intent == "greeting":
-        return "Hello! I am a Heart Disease Prediction AI. Please describe your symptoms (e.g., chest pain, shortness of breath) and I will try to assess your condition."
+        return "Hello! I am a Heart Disease Prediction AI. Please describe your symptoms (e.g., chest pain, shortness of breath) and I will assess your condition based on our clinical guidelines."
     elif intent == "medical_symptom":
         return medical_synthesizer_agent(user_input)
     else:
         return "I am specialized in heart disease prediction. Please describe any heart-related symptoms you are experiencing."
 
 if __name__ == "__main__":
-    print("Testing Orchestrator...")
-    print(orchestrator("Hello"))
-    print("-" * 20)
-    print(orchestrator("I have severe chest pain and sweating."))
-
-# Enhanced intent recognition coming soon
-
-# Integrate with OpenRouter LLM
+    print(orchestrator("I have chest pain and shortness of breath."))

@@ -1,7 +1,14 @@
-Medical Document 8
-Topic: Endocarditis
+MEDICAL CLINICAL GUIDELINE - DOCUMENT 8
+SUBJECT: Hypertrophic Cardiomyopathy - Pathophysiology, Diagnosis, and Management
 
-Symptoms and Presentation:
-Patients with Endocarditis typically present with the following symptoms: Aching joints and muscles, chest pain when breathing, fatigue, flu-like symptoms, night sweats.
-Diagnosis often involves ECG, echocardiogram, and blood tests. Early detection is critical for improving patient outcomes.
-Treatment options may include lifestyle changes, medications (such as beta-blockers or ACE inhibitors), and in severe cases, surgical interventions.
+1. CLINICAL PRESENTATION & SYMPTOMATOLOGY
+Patients afflicted with Hypertrophic Cardiomyopathy typically manifest with the following clinical symptoms: dyspnea, chest pain, sudden cardiac death in young athletes, harsh systolic murmur. 
+These symptoms often present acutely and require immediate clinical assessment. A thorough history of the present illness should focus on the onset, provocation, quality, radiation, and severity of these symptoms.
+
+2. DIAGNOSTIC MODALITIES
+Gold standard diagnostics include: Echocardiogram showing asymmetric septal hypertrophy. 
+Clinicians must evaluate laboratory markers and imaging concurrently to rule out differential diagnoses such as pulmonary embolism or acute aortic dissection.
+
+3. EVIDENCE-BASED TREATMENT PROTOCOLS
+Standard of care dictates the following pharmacological and surgical interventions: Beta-blockers, Calcium channel blockers, ICD placement.
+Patient prognosis improves by 40% when treatment is initiated within the first 24 hours of symptom onset. Long-term management requires continuous hemodynamic monitoring and lifestyle modifications including smoking cessation and dietary adjustments.

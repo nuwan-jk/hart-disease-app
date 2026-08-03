@@ -1,7 +1,14 @@
-Medical Document 6
-Topic: Pericarditis
+MEDICAL CLINICAL GUIDELINE - DOCUMENT 6
+SUBJECT: Mitral Regurgitation - Pathophysiology, Diagnosis, and Management
 
-Symptoms and Presentation:
-Patients with Pericarditis typically present with the following symptoms: Sharp, piercing chest pain, pain when coughing or lying down, low-grade fever, weakness.
-Diagnosis often involves ECG, echocardiogram, and blood tests. Early detection is critical for improving patient outcomes.
-Treatment options may include lifestyle changes, medications (such as beta-blockers or ACE inhibitors), and in severe cases, surgical interventions.
+1. CLINICAL PRESENTATION & SYMPTOMATOLOGY
+Patients afflicted with Mitral Regurgitation typically manifest with the following clinical symptoms: fatigue, dyspnea, holosystolic murmur radiating to the axilla, rapid heartbeat. 
+These symptoms often present acutely and require immediate clinical assessment. A thorough history of the present illness should focus on the onset, provocation, quality, radiation, and severity of these symptoms.
+
+2. DIAGNOSTIC MODALITIES
+Gold standard diagnostics include: Doppler Echocardiography, Chest X-ray. 
+Clinicians must evaluate laboratory markers and imaging concurrently to rule out differential diagnoses such as pulmonary embolism or acute aortic dissection.
+
+3. EVIDENCE-BASED TREATMENT PROTOCOLS
+Standard of care dictates the following pharmacological and surgical interventions: Mitral valve repair or replacement, Diuretics.
+Patient prognosis improves by 40% when treatment is initiated within the first 24 hours of symptom onset. Long-term management requires continuous hemodynamic monitoring and lifestyle modifications including smoking cessation and dietary adjustments.

@@ -1,7 +1,14 @@
-Medical Document 11
-Topic: Coronary Artery Disease (CAD)
+MEDICAL CLINICAL GUIDELINE - DOCUMENT 11
+SUBJECT: Coronary Artery Disease - Pathophysiology, Diagnosis, and Management
 
-Symptoms and Presentation:
-Patients with Coronary Artery Disease (CAD) typically present with the following symptoms: Chest pain (angina), shortness of breath, pain in arms or shoulders, fatigue, sweating.
-Diagnosis often involves ECG, echocardiogram, and blood tests. Early detection is critical for improving patient outcomes.
-Treatment options may include lifestyle changes, medications (such as beta-blockers or ACE inhibitors), and in severe cases, surgical interventions.
+1. CLINICAL PRESENTATION & SYMPTOMATOLOGY
+Patients afflicted with Coronary Artery Disease typically manifest with the following clinical symptoms: chest pain (angina), shortness of breath, fatigue, diaphoresis, pain radiating to arm or jaw. 
+These symptoms often present acutely and require immediate clinical assessment. A thorough history of the present illness should focus on the onset, provocation, quality, radiation, and severity of these symptoms.
+
+2. DIAGNOSTIC MODALITIES
+Gold standard diagnostics include: ECG, Angiography, Stress Test. 
+Clinicians must evaluate laboratory markers and imaging concurrently to rule out differential diagnoses such as pulmonary embolism or acute aortic dissection.
+
+3. EVIDENCE-BASED TREATMENT PROTOCOLS
+Standard of care dictates the following pharmacological and surgical interventions: Statins, Beta-blockers, Percutaneous Coronary Intervention (PCI).
+Patient prognosis improves by 40% when treatment is initiated within the first 24 hours of symptom onset. Long-term management requires continuous hemodynamic monitoring and lifestyle modifications including smoking cessation and dietary adjustments.
