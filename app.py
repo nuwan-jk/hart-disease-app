@@ -57,3 +57,5 @@ if prompt := st.chat_input("Describe your symptoms here... (e.g., 'I have chest 
 # Session state persistence
 
 # API keys validation
+
+# Final UI polish
