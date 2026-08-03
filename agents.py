@@ -57,8 +57,8 @@ Medical Context:
 Response:"""
     
     try:
-        response = openrouter_client.chat.completions.create(
-            model="google/gemma-2-9b-it:free",
+        response = groq_client.chat.completions.create(
+            model="llama3-70b-8192",
             messages=[
                 {"role": "user", "content": prompt}
             ],
